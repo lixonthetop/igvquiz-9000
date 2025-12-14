@@ -14,7 +14,6 @@
             padding: 0;
             line-height: 1.6;
         }
-        
         header {
             background-color: #E63946; /* Red */
             color: white;
@@ -24,7 +23,6 @@
             font-weight: bold;
             letter-spacing: 1px;
         }
-
         .container {
             max-width: 900px;
             margin: 40px auto;
@@ -33,7 +31,16 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-
+        .start-screen {
+            text-align: center;
+        }
+        .start-screen input[type="text"] {
+            padding: 10px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            border: 2px solid #E63946;
+            border-radius: 5px;
+        }
         .question {
             background-color: #fff;
             margin: 20px 0;
@@ -42,12 +49,10 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
-
         .question h3 {
             margin: 0;
             color: #333;
         }
-
         .answer {
             display: none;
             margin-top: 10px;
@@ -57,7 +62,6 @@
             border-radius: 5px;
             color: #2a3d4f;
         }
-
         button {
             background-color: #E63946; /* Red */
             color: white;
@@ -67,35 +71,51 @@
             cursor: pointer;
             font-size: 1.1em;
             transition: background-color 0.3s;
+            margin: 5px;
         }
-
         button:hover {
             background-color: #D92D2A; /* Darker red */
         }
-
         footer {
             text-align: center;
             margin-top: 50px;
             font-size: 1.1em;
             color: #777;
         }
-
         footer p {
             margin: 10px 0;
         }
-
+        .quiz-content {
+            display: none;
+        }
+        .results-screen {
+            display: none;
+            text-align: center;
+        }
+        .leaderboard {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .leaderboard th, .leaderboard td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .leaderboard th {
+            background-color: #E63946;
+            color: white;
+        }
         /* Style for mobile */
         @media (max-width: 600px) {
             header {
                 font-size: 2em;
                 padding: 15px;
             }
-
             .container {
                 padding: 20px;
                 margin: 20px;
             }
-
             button {
                 font-size: 1em;
             }
@@ -103,144 +123,201 @@
     </style>
 </head>
 <body>
-    <header>
-        Quiz by Mathieu
-    </header>
-
+    <header> Quiz by Mathieu </header>
     <div class="container">
-        <!-- Question 1 -->
-        <div class="question">
-            <h3>1. Qu'est-ce que l'IVG ?</h3>
-            <button onclick="toggleAnswer(1)">Voir la réponse</button>
-            <div id="answer1" class="answer">
-                L'IVG est l'Interruption Volontaire de Grossesse. C'est le choix d'une femme d'arrêter une grossesse, autorisé en France jusqu'à 14 semaines de grossesse.
-            </div>
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen">
+            <h2>Bienvenue au Quiz sur l'IVG</h2>
+            <p>Veuillez entrer votre nom pour commencer :</p>
+            <input type="text" id="userName" placeholder="Votre nom">
+            <br>
+            <button onclick="startQuiz()">Commencer le quiz</button>
         </div>
-        
-        <!-- Question 2 -->
-        <div class="question">
-            <h3>2. Jusqu'à combien de semaines l'IVG est-elle autorisée en France ?</h3>
-            <button onclick="toggleAnswer(2)">Voir la réponse</button>
-            <div id="answer2" class="answer">
-                L'IVG est autorisée jusqu'à 14 semaines de grossesse en France.
+
+        <!-- Quiz Content -->
+        <div id="quizContent" class="quiz-content">
+            <!-- Question 1 -->
+            <div class="question">
+                <h3>1. Qu'est-ce que l'IVG ?</h3>
+                <button onclick="toggleAnswer(1)">Voir la réponse</button>
+                <button onclick="markCorrect(1)">Bonne réponse</button>
+                <button onclick="markIncorrect(1)">Mauvaise réponse</button>
+                <div id="answer1" class="answer"> L'IVG est l'Interruption Volontaire de Grossesse. C'est le choix d'une femme d'arrêter une grossesse, autorisé en France jusqu'à 14 semaines de grossesse. </div>
+            </div>
+            <!-- Question 2 -->
+            <div class="question">
+                <h3>2. Jusqu'à combien de semaines l'IVG est-elle autorisée en France ?</h3>
+                <button onclick="toggleAnswer(2)">Voir la réponse</button>
+                <button onclick="markCorrect(2)">Bonne réponse</button>
+                <button onclick="markIncorrect(2)">Mauvaise réponse</button>
+                <div id="answer2" class="answer"> L'IVG est autorisée jusqu'à 14 semaines de grossesse en France. </div>
+            </div>
+            <!-- Question 3 -->
+            <div class="question">
+                <h3>3. Quelles sont les deux principales méthodes d'IVG ?</h3>
+                <button onclick="toggleAnswer(3)">Voir la réponse</button>
+                <button onclick="markCorrect(3)">Bonne réponse</button>
+                <button onclick="markIncorrect(3)">Mauvaise réponse</button>
+                <div id="answer3" class="answer"> Il existe deux méthodes : l'IVG médicamenteuse (jusqu'à 9 semaines) et l'IVG instrumentale (jusqu'à 14 semaines). </div>
+            </div>
+            <!-- Question 4 -->
+            <div class="question">
+                <h3>4. L'IVG est-elle gratuite pour les mineures ?</h3>
+                <button onclick="toggleAnswer(4)">Voir la réponse</button>
+                <button onclick="markCorrect(4)">Bonne réponse</button>
+                <button onclick="markIncorrect(4)">Mauvaise réponse</button>
+                <div id="answer4" class="answer"> Oui, l'IVG est gratuite pour les mineures en France. </div>
+            </div>
+            <!-- Question 5 -->
+            <div class="question">
+                <h3>5. Faut-il une autorisation parentale pour une mineure qui souhaite pratiquer une IVG ?</h3>
+                <button onclick="toggleAnswer(5)">Voir la réponse</button>
+                <button onclick="markCorrect(5)">Bonne réponse</button>
+                <button onclick="markIncorrect(5)">Mauvaise réponse</button>
+                <div id="answer5" class="answer"> Non, il n'est pas nécessaire d'obtenir l'autorisation parentale pour une mineure. </div>
+            </div>
+            <!-- Question 6 -->
+            <div class="question">
+                <h3>6. Qui a porté la loi autorisant l'IVG en France ?</h3>
+                <button onclick="toggleAnswer(6)">Voir la réponse</button>
+                <button onclick="markCorrect(6)">Bonne réponse</button>
+                <button onclick="markIncorrect(6)">Mauvaise réponse</button>
+                <div id="answer6" class="answer"> La loi sur l'IVG a été portée par Simone Veil en 1975. </div>
+            </div>
+            <!-- Question 7 -->
+            <div class="question">
+                <h3>7. Est-ce que l'IVG peut altérer la fertilité d'une femme ?</h3>
+                <button onclick="toggleAnswer(7)">Voir la réponse</button>
+                <button onclick="markCorrect(7)">Bonne réponse</button>
+                <button onclick="markIncorrect(7)">Mauvaise réponse</button>
+                <div id="answer7" class="answer"> Non, l'IVG n'altère pas la fertilité de la femme. </div>
+            </div>
+            <!-- Question 8 -->
+            <div class="question">
+                <h3>8. L'IVG est-elle un acte médical sécurisé ?</h3>
+                <button onclick="toggleAnswer(8)">Voir la réponse</button>
+                <button onclick="markCorrect(8)">Bonne réponse</button>
+                <button onclick="markIncorrect(8)">Mauvaise réponse</button>
+                <div id="answer8" class="answer"> Oui, l'IVG est un acte médical encadré et sûr. </div>
+            </div>
+                       <!-- Question 9 -->
+            <div class="question">
+                <h3>9. Où peut-on pratiquer une IVG médicamenteuse ?</h3>
+                <button onclick="toggleAnswer(9)">Voir la réponse</button>
+                <button onclick="markCorrect(9)">Bonne réponse</button>
+                <button onclick="markIncorrect(9)">Mauvaise réponse</button>
+                <div id="answer9" class="answer"> L'IVG médicamenteuse peut se faire en cabinet, centre de santé ou à l'hôpital. </div>
+            </div>
+            <!-- Question 10 -->
+            <div class="question">
+                <h3>10. Quelle est la différence entre l'IVG médicamenteuse et l'IVG instrumentale ?</h3>
+                <button onclick="toggleAnswer(10)">Voir la réponse</button>
+                <button onclick="markCorrect(10)">Bonne réponse</button>
+                <button onclick="markIncorrect(10)">Mauvaise réponse</button>
+                <div id="answer10" class="answer"> L'IVG médicamenteuse se fait par la prise de comprimés et est possible jusqu'à 9 semaines. L'IVG instrumentale est une intervention chirurgicale réalisée jusqu'à 14 semaines. </div>
+            </div>
+            <!-- Question 11 -->
+            <div class="question">
+                <h3>11. L'IVG peut-elle être pratiquée de manière anonyme ?</h3>
+                <button onclick="toggleAnswer(11)">Voir la réponse</button>
+                <button onclick="markCorrect(11)">Bonne réponse</button>
+                <button onclick="markIncorrect(11)">Mauvaise réponse</button>
+                <div id="answer11" class="answer"> Oui, l'IVG peut être pratiquée de manière anonyme en France. </div>
+            </div>
+            <!-- Question 12 -->
+            <div class="question">
+                <h3>12. Quels sont les professionnels impliqués dans l'IVG ?</h3>
+                <button onclick="toggleAnswer(12)">Voir la réponse</button>
+                <button onclick="markCorrect(12)">Bonne réponse</button>
+                <button onclick="markIncorrect(12)">Mauvaise réponse</button>
+                <div id="answer12" class="answer"> Les médecins, les gynécologues, les conseillers du planning familial, les psychologues et les infirmiers. </div>
+            </div>
+            <!-- Question 13 -->
+            <div class="question">
+                <h3>13. L'accompagnement psychologique est-il disponible pour les femmes qui pratiquent une IVG ?</h3>
+                <button onclick="toggleAnswer(13)">Voir la réponse</button>
+                <button onclick="markCorrect(13)">Bonne réponse</button>
+                <button onclick="markIncorrect(13)">Mauvaise réponse</button>
+                <div id="answer13" class="answer"> Oui, un accompagnement psychologique est disponible pour les femmes qui en ont besoin. </div>
+            </div>
+            <!-- Question 14 -->
+            <div class="question">
+                <h3>14. Quel est le rôle du Planning Familial en France ?</h3>
+                <button onclick="toggleAnswer(14)">Voir la réponse</button>
+                <button onclick="markCorrect(14)">Bonne réponse</button>
+                <button onclick="markIncorrect(14)">Mauvaise réponse</button>
+                <div id="answer14" class="answer"> Le Planning Familial soutient les droits des femmes, en particulier l'accès à l'IVG et à la contraception. </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="finishQuiz()">Voir mon score</button>
             </div>
         </div>
 
-        <!-- Question 3 -->
-        <div class="question">
-            <h3>3. Quelles sont les deux principales méthodes d'IVG ?</h3>
-            <button onclick="toggleAnswer(3)">Voir la réponse</button>
-            <div id="answer3" class="answer">
-                Il existe deux méthodes : l'IVG médicamenteuse (jusqu'à 9 semaines) et l'IVG instrumentale (jusqu'à 14 semaines).
-            </div>
-        </div>
-
-        <!-- Question 4 -->
-        <div class="question">
-            <h3>4. L'IVG est-elle gratuite pour les mineures ?</h3>
-            <button onclick="toggleAnswer(4)">Voir la réponse</button>
-            <div id="answer4" class="answer">
-                Oui, l'IVG est gratuite pour les mineures en France.
-            </div>
-        </div>
-
-        <!-- Question 5 -->
-        <div class="question">
-            <h3>5. Faut-il une autorisation parentale pour une mineure qui souhaite pratiquer une IVG ?</h3>
-            <button onclick="toggleAnswer(5)">Voir la réponse</button>
-            <div id="answer5" class="answer">
-                Non, il n'est pas nécessaire d'obtenir l'autorisation parentale pour une mineure.
-            </div>
-        </div>
-
-        <!-- Question 6 -->
-        <div class="question">
-            <h3>6. Qui a porté la loi autorisant l'IVG en France ?</h3>
-            <button onclick="toggleAnswer(6)">Voir la réponse</button>
-            <div id="answer6" class="answer">
-                La loi sur l'IVG a été portée par Simone Veil en 1975.
-            </div>
-        </div>
-
-        <!-- Question 7 -->
-        <div class="question">
-            <h3>7. Est-ce que l'IVG peut altérer la fertilité d'une femme ?</h3>
-            <button onclick="toggleAnswer(7)">Voir la réponse</button>
-            <div id="answer7" class="answer">
-                Non, l'IVG n'altère pas la fertilité de la femme.
-            </div>
-        </div>
-
-        <!-- Question 8 -->
-        <div class="question">
-            <h3>8. L'IVG est-elle un acte médical sécurisé ?</h3>
-            <button onclick="toggleAnswer(8)">Voir la réponse</button>
-            <div id="answer8" class="answer">
-                Oui, l'IVG est un acte médical encadré et sûr.
-            </div>
-        </div>
-
-        <!-- Question 9 -->
-        <div class="question">
-            <h3>9. Où peut-on pratiquer une IVG médicamenteuse ?</h3>
-            <button onclick="toggleAnswer(9)">Voir la réponse</button>
-            <div id="answer9" class="answer">
-                L'IVG médicamenteuse peut se faire en cabinet, centre de santé ou à l'hôpital.
-            </div>
-        </div>
-
-        <!-- Question 10 -->
-        <div class="question">
-            <h3>10. Quelle est la différence entre l'IVG médicamenteuse et l'IVG instrumentale ?</h3>
-            <button onclick="toggleAnswer(10)">Voir la réponse</button>
-            <div id="answer10" class="answer">
-                L'IVG médicamenteuse se fait par la prise de comprimés et est possible jusqu'à 9 semaines. L'IVG instrumentale est une intervention chirurgicale réalisée jusqu'à 14 semaines.
-            </div>
-        </div>
-
-        <!-- Question 11 -->
-        <div class="question">
-            <h3>11. L'IVG peut-elle être pratiquée de manière anonyme ?</h3>
-            <button onclick="toggleAnswer(11)">Voir la réponse</button>
-            <div id="answer11" class="answer">
-                Oui, l'IVG peut être pratiquée de manière anonyme en France.
-            </div>
-        </div>
-
-        <!-- Question 12 -->
-        <div class="question">
-            <h3>12. Quels sont les professionnels impliqués dans l'IVG ?</h3>
-            <button onclick="toggleAnswer(12)">Voir la réponse</button>
-            <div id="answer12" class="answer">
-                Les médecins, les gynécologues, les conseillers du planning familial, les psychologues et les infirmiers.
-            </div>
-        </div>
-
-        <!-- Question 13 -->
-        <div class="question">
-            <h3>13. L'accompagnement psychologique est-il disponible pour les femmes qui pratiquent une IVG ?</h3>
-            <button onclick="toggleAnswer(13)">Voir la réponse</button>
-            <div id="answer13" class="answer">
-                Oui, un accompagnement psychologique est disponible pour les femmes qui en ont besoin.
-            </div>
-        </div>
-
-        <!-- Question 14 -->
-        <div class="question">
-            <h3>14. Quel est le rôle du Planning Familial en France ?</h3>
-            <button onclick="toggleAnswer(14)">Voir la réponse</button>
-            <div id="answer14" class="answer">
-                Le Planning Familial soutient les droits des femmes, en particulier l'accès à l'IVG et à la contraception.
-            </div>
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="results-screen">
+            <h2>Résultats du Quiz</h2>
+            <p id="userResult"></p>
+            <p id="scoreDisplay"></p>
+            <h3>Classement</h3>
+            <table class="leaderboard">
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Nom</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- Scores will be inserted here -->
+                </tbody>
+            </table>
+            <button onclick="resetQuiz()">Recommencer</button>
         </div>
     </div>
-
     <footer>
         <p>Quiz interactif créé par Mathieu</p>
     </footer>
 
     <script>
-        // Fonction pour afficher ou masquer la réponse
+        // Global variables
+        let currentUserName = '';
+        let score = 0;
+        const totalQuestions = 14;
+        let leaderboard = [];
+
+        // Load leaderboard from localStorage
+        function loadLeaderboard() {
+            const stored = localStorage.getItem('ivgQuizLeaderboard');
+            if (stored) {
+                leaderboard = JSON.parse(stored);
+            }
+        }
+
+        // Save leaderboard to localStorage
+        function saveLeaderboard() {
+            localStorage.setItem('ivgQuizLeaderboard', JSON.stringify(leaderboard));
+        }
+
+        // Start the quiz
+        function startQuiz() {
+            const nameInput = document.getElementById('userName');
+            if (nameInput.value.trim() === '') {
+                alert('Veuillez entrer votre nom.');
+                return;
+            }
+            currentUserName = nameInput.value.trim();
+            score = 0;
+            
+            // Reset all question states
+            for (let i = 1; i <= totalQuestions; i++) {
+                document.getElementById('answer' + i).style.display = 'none';
+            }
+
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'block';
+        }
+
+        // Toggle answer visibility
         function toggleAnswer(questionNumber) {
             var answerDiv = document.getElementById('answer' + questionNumber);
             if (answerDiv.style.display === "block") {
@@ -249,6 +326,120 @@
                 answerDiv.style.display = "block";
             }
         }
+
+        // Mark answer as correct
+        function markCorrect(questionNumber) {
+            // Prevent multiple answers for the same question
+            if (!isQuestionAnswered(questionNumber)) {
+                score++;
+                markQuestionAsAnswered(questionNumber, true);
+            }
+        }
+
+        // Mark answer as incorrect
+        function markIncorrect(questionNumber) {
+            // Prevent multiple answers for the same question
+            if (!isQuestionAnswered(questionNumber)) {
+                markQuestionAsAnswered(questionNumber, false);
+            }
+        }
+
+        // Check if a question has already been answered
+        function isQuestionAnswered(questionNumber) {
+            const questionDiv = document.querySelector(`#answer${questionNumber}`).parentElement;
+            return questionDiv.dataset.answered === 'true';
+        }
+
+        // Mark a question as answered and change its style
+        function markQuestionAsAnswered(questionNumber, isCorrect) {
+            const questionDiv = document.querySelector(`#answer${questionNumber}`).parentElement;
+            questionDiv.dataset.answered = 'true';
+            
+            // Change background color based on answer
+            if (isCorrect) {
+                questionDiv.style.backgroundColor = '#d4edda'; // Light green
+            } else {
+                questionDiv.style.backgroundColor = '#f8d7da'; // Light red
+            }
+        }
+
+        // Finish the quiz and show results
+        function finishQuiz() {
+            // Check if all questions have been answered
+            let allAnswered = true;
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (!isQuestionAnswered(i)) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+            
+            if (!allAnswered) {
+                if (!confirm('Vous n\'avez pas répondu à toutes les questions. Voulez-vous continuer quand même?')) {
+                    return;
+                }
+            }
+
+            // Add score to leaderboard
+            leaderboard.push({
+                name: currentUserName,
+                score: score,
+                date: new Date().toISOString()
+            });
+
+            // Sort leaderboard by score (descending)
+            leaderboard.sort((a, b) => b.score - a.score);
+
+            // Keep only top 10 scores
+            leaderboard = leaderboard.slice(0, 10);
+
+            // Save leaderboard
+            saveLeaderboard();
+
+            // Show results
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+            
+            document.getElementById('userResult').textContent = `\${currentUserName}, votre score est :`;
+            document.getElementById('scoreDisplay').textContent = `${score} / ${totalQuestions}`;
+            
+            // Update leaderboard table
+            updateLeaderboardDisplay();
+        }
+
+        // Update the leaderboard display
+        function updateLeaderboardDisplay() {
+            const tbody = document.getElementById('leaderboardBody');
+            tbody.innerHTML = '';
+            
+            leaderboard.forEach((entry, index) => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = index + 1;
+                row.insertCell(1).textContent = entry.name;
+                row.insertCell(2).textContent = `${entry.score} / ${totalQuestions}`;
+            });
+        }
+
+        // Reset the quiz to start screen
+        function resetQuiz() {
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+            document
+.getElementById('userName').value = '';
+            // Reset question styles and data
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(q => {
+                q.style.backgroundColor = '#fff';
+                delete q.dataset.answered;
+            });
+        }
+
+        // Initialize the leaderboard when the page loads
+        window.onload = function() {
+            loadLeaderboard();
+            // If you want to show the leaderboard on the start screen, you can do it here
+            // For now, it's only shown after completing the quiz
+        };
     </script>
 </body>
 </html>
