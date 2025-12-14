@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sur l'IVG</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #E63946; /* Red */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #E63946; /* Red border */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .answer {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #F1FAEE; /* Light gray */
+            border-left: 4px solid #E63946; /* Red left border */
+            border-radius: 5px;
+            color: #2a3d4f;
+        }
+
+        button {
+            background-color: #E63946; /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #D92D2A; /* Darker red */
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.1em;
+            color: #777;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        /* Style for mobile */
+        @media (max-width: 600px) {
+            header {
+                font-size: 2em;
+                padding: 15px;
+            }
+
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Quiz by Mathieu
+    </header>
+
+    <div class="container">
+        <!-- Question 1 -->
+        <div class="question">
+            <h3>1. Qu'est-ce que l'IVG ?</h3>
+            <button onclick="toggleAnswer(1)">Voir la réponse</button>
+            <div id="answer1" class="answer">
+                L'IVG est l'Interruption Volontaire de Grossesse. C'est le choix d'une femme d'arrêter une grossesse, autorisé en France jusqu'à 14 semaines de grossesse.
+            </div>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question">
+            <h3>2. Jusqu'à combien de semaines l'IVG est-elle autorisée en France ?</h3>
+            <button onclick="toggleAnswer(2)">Voir la réponse</button>
+            <div id="answer2" class="answer">
+                L'IVG est autorisée jusqu'à 14 semaines de grossesse en France.
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h3>3. Quelles sont les deux principales méthodes d'IVG ?</h3>
+            <button onclick="toggleAnswer(3)">Voir la réponse</button>
+            <div id="answer3" class="answer">
+                Il existe deux méthodes : l'IVG médicamenteuse (jusqu'à 9 semaines) et l'IVG instrumentale (jusqu'à 14 semaines).
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <h3>4. L'IVG est-elle gratuite pour les mineures ?</h3>
+            <button onclick="toggleAnswer(4)">Voir la réponse</button>
+            <div id="answer4" class="answer">
+                Oui, l'IVG est gratuite pour les mineures en France.
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <h3>5. Faut-il une autorisation parentale pour une mineure qui souhaite pratiquer une IVG ?</h3>
+            <button onclick="toggleAnswer(5)">Voir la réponse</button>
+            <div id="answer5" class="answer">
+                Non, il n'est pas nécessaire d'obtenir l'autorisation parentale pour une mineure.
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <h3>6. Qui a porté la loi autorisant l'IVG en France ?</h3>
+            <button onclick="toggleAnswer(6)">Voir la réponse</button>
+            <div id="answer6" class="answer">
+                La loi sur l'IVG a été portée par Simone Veil en 1975.
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <h3>7. Est-ce que l'IVG peut altérer la fertilité d'une femme ?</h3>
+            <button onclick="toggleAnswer(7)">Voir la réponse</button>
+            <div id="answer7" class="answer">
+                Non, l'IVG n'altère pas la fertilité de la femme.
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <h3>8. L'IVG est-elle un acte médical sécurisé ?</h3>
+            <button onclick="toggleAnswer(8)">Voir la réponse</button>
+            <div id="answer8" class="answer">
+                Oui, l'IVG est un acte médical encadré et sûr.
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <h3>9. Où peut-on pratiquer une IVG médicamenteuse ?</h3>
+            <button onclick="toggleAnswer(9)">Voir la réponse</button>
+            <div id="answer9" class="answer">
+                L'IVG médicamenteuse peut se faire en cabinet, centre de santé ou à l'hôpital.
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <h3>10. Quelle est la différence entre l'IVG médicamenteuse et l'IVG instrumentale ?</h3>
+            <button onclick="toggleAnswer(10)">Voir la réponse</button>
+            <div id="answer10" class="answer">
+                L'IVG médicamenteuse se fait par la prise de comprimés et est possible jusqu'à 9 semaines. L'IVG instrumentale est une intervention chirurgicale réalisée jusqu'à 14 semaines.
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question">
+            <h3>11. L'IVG peut-elle être pratiquée de manière anonyme ?</h3>
+            <button onclick="toggleAnswer(11)">Voir la réponse</button>
+            <div id="answer11" class="answer">
+                Oui, l'IVG peut être pratiquée de manière anonyme en France.
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question">
+            <h3>12. Quels sont les professionnels impliqués dans l'IVG ?</h3>
+            <button onclick="toggleAnswer(12)">Voir la réponse</button>
+            <div id="answer12" class="answer">
+                Les médecins, les gynécologues, les conseillers du planning familial, les psychologues et les infirmiers.
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question">
+            <h3>13. L'accompagnement psychologique est-il disponible pour les femmes qui pratiquent une IVG ?</h3>
+            <button onclick="toggleAnswer(13)">Voir la réponse</button>
+            <div id="answer13" class="answer">
+                Oui, un accompagnement psychologique est disponible pour les femmes qui en ont besoin.
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question">
+            <h3>14. Quel est le rôle du Planning Familial en France ?</h3>
+            <button onclick="toggleAnswer(14)">Voir la réponse</button>
+            <div id="answer14" class="answer">
+                Le Planning Familial soutient les droits des femmes, en particulier l'accès à l'IVG et à la contraception.
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Quiz interactif créé par Mathieu</p>
+    </footer>
+
+    <script>
+        // Fonction pour afficher ou masquer la réponse
+        function toggleAnswer(questionNumber) {
+            var answerDiv = document.getElementById('answer' + questionNumber);
+            if (answerDiv.style.display === "block") {
+                answerDiv.style.display = "none";
+            } else {
+                answerDiv.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
